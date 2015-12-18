@@ -16,7 +16,7 @@ def niceString(str):
 	return False
 
 def nicerString(str):
-	"""String is nicer if it contains matching pairs without overlap and open
+	"""String is nicer if it contains matching pairs without overlap and one
 	letter that repeats with a letter in between."""
 	pairMatch = letterMatch = False
 	for i, c in enumerate(str):
