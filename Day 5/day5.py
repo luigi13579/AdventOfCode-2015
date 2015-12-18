@@ -15,9 +15,28 @@ def niceString(str):
 	if numVowels >= 3 and numDoubles >= 1: return True
 	return False
 
+def nicerString(str):
+	"""String is nicer if it contains matching pairs without overlap and open
+	letter that repeats with a letter in between."""
+	pairMatch = letterMatch = False
+	for i, c in enumerate(str):
+		if pairMatch is False and i < len(str)-3:
+			pair = "%s%s" % (c, str[i+1])
+			for j in xrange(i+2, len(str)-1):
+				pair2 = "%s%s" % (str[j], str[j+1])
+				if pair == pair2: pairMatch = True
+		if letterMatch is False and i < len(str)-2:
+			if c is str[i+2]: letterMatch = True
+		if pairMatch and letterMatch: return True
+	return False
+
 with open("input") as f:
 	input = f.read().split()
 	numNiceStrings = 0
+	numNicerStrings = 0
+
 	for str in input:
 		if niceString(str) is True: numNiceStrings += 1
+		if nicerString(str) is True: numNicerStrings += 1
 	print "%d strings are nice." % numNiceStrings
+	print "%d strings are nicer." % numNicerStrings
